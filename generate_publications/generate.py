@@ -24,14 +24,14 @@ except ImportError:
 # ---------- Mapping helpers ----------
 
 TYPE_MAP = {
-    "inproceedings": ("conference", "Conf"),
-    "conference": ("conference", "Conf"),
-    "proceedings": ("conference", "Conf"),
-    "article": ("journal", "Jour"),
-    "journal": ("journal", "Jour"),
-    "phdthesis": ("phdthesis", "PhD"),
-    "mastersthesis": ("masterthesis", "MSc"),
-    "incollection": ("bookchapter", "Ch"),
+    "inproceedings": ("conference", "Conference"),
+    "conference": ("conference", "Conference"),
+    "proceedings": ("conference", "Conference"),
+    "article": ("journal", "Journal"),
+    "journal": ("journal", "Journal"),
+    "phdthesis": ("phdthesis", "PhD Thesis"),
+    "mastersthesis": ("masterthesis", "MSc Thesis"),
+    "incollection": ("bookchapter", "Chapter"),
     "book": ("book", "Book"),
     "misc": ("other", "Other"),
 }
@@ -245,6 +245,8 @@ def normalize_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
         latex_to_unicode(entry.get("author", ""))
     )
     venue = build_venue(entry)
+    doi = clean_braces(entry.get("doi", ""))
+    url = clean_braces(entry.get("url", ""))
 
     return {
         "year": year,
@@ -254,6 +256,8 @@ def normalize_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
         "authorsDisplay": authors_display,
         "authorsData": authors_data,
         "venue": venue,
+        "doi": doi,
+        "url": url,
     }
 
 
