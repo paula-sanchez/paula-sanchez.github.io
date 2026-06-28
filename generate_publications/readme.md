@@ -1,6 +1,6 @@
 # How to add my publications?
 
-1. Navigate this link in a browser: [https://github.com/ARCOS-UC3M/arcos-uc3m.github.io/tree/template/generate_publications/bibs](https://github.com/ARCOS-UC3M/arcos-uc3m.github.io/tree/template/generate_publications/bibs).
+1. Navigate this link in a browser: [https://github.com/paula-sanchez/paulasan.github.io/tree/main/generate_publications/bibs](https://github.com/paula-sanchez/paulasan.github.io/tree/main/generate_publications/bibs).
 
 2. Click on add ```Add file``` > ```Create new file```.
 3. If you don't have writing permissions on the repo, you should create a fork and the propose changes through a ```Pull request```.
