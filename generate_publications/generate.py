@@ -64,8 +64,8 @@ def find_workshop_papers(entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     workshop_entries = []
 
     for entry in entries:
-        id = entry.get("ID", "").lower()
-        if any(keyword in id for keyword in workshop_keys):
+        entry_id = (entry.get("key") or "").lower()
+        if any(keyword in entry_id for keyword in workshop_keys):
             workshop_entries.append(entry)
 
     return workshop_entries
