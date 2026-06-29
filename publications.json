@@ -14,8 +14,8 @@
   },
   {
     "year": 2024,
-    "type": "conference",
-    "badge": "Conference",
+    "type": "workshop",
+    "badge": "Workshop",
     "title": "A transformer and data augmentation-based approach for propaganda identification and classification",
     "authorsDisplay": "Sanchez-Checa, P., Gallego-Torres, L., Sanchez-Escudero, M. A., Petre, C., & Segura-Bedmar, I.",
     "authorsData": "Sanchez-Checa, Gallego-Torres, Sanchez-Escudero, Petre, Segura-Bedmar",
@@ -27,8 +27,8 @@
   },
   {
     "year": 2025,
-    "type": "conference",
-    "badge": "Conference",
+    "type": "workshop",
+    "badge": "Workshop",
     "title": "Combining Malleability and Distributed Control Mechanisms to Reduce I/O Contention",
     "authorsDisplay": "Sanchez-Checa, P., Garcia-Blas, J., Carretero, J., & Singh, D. E.",
     "authorsData": "Sanchez-Checa, Garcia-Blas, Carretero, Singh",
