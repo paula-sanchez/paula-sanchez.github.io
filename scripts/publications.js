@@ -57,6 +57,7 @@
   function renderPublication(pub) {
     const borderAndBadgeClasses = getTypeClasses(pub.type);
     const hasBibtex = !!pub.bibtex;
+    const bibtexViewUrl = hasBibtex ? `data:text/plain;charset=utf-8,${encodeURIComponent(pub.bibtex)}` : null;
 
     return `
       <div class="pub-item flex flex-col sm:flex-row gap-4 p-6 rounded-lg border-l-4 ${borderAndBadgeClasses.border} bg-white shadow-sm hover:shadow-md transition"
@@ -80,14 +81,15 @@
             ${pub.venue}
           </p>
           ${hasBibtex ? `
-            <div class="mt-4 flex gap-2">
-              <button
+            <div class="mt-4 flex gap-2 flex-wrap">
+              <a
+                href="${bibtexViewUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="text-xs flex items-center px-3 py-1 border border-gray-200 rounded text-gray-500 hover:text-brand-600 hover:border-brand-600 transition"
-                type="button"
-                data-bibtex='${escapeHtml(pub.bibtex)}'
               >
                 <i class="fa-solid fa-quote-right mr-2"></i>BibTeX
-              </button>
+              </a>
             </div>
           ` : ''}
         </div>
