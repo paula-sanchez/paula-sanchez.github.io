@@ -42,9 +42,10 @@ jobs:
           else
             git commit -m "Update publications JSON from bib changes"
             
-            # Pull latest changes before pushing with rebase to avoid conflicts
-            git pull origin ${GITHUB_REF#refs/heads/} --rebase
+            # Fetch latest and rebase to incorporate remote changes
+            git fetch origin ${GITHUB_REF#refs/heads/}
+            git rebase origin/${GITHUB_REF#refs/heads/}
             
-            # Push back to the same branch that triggered the workflow
-            git push origin HEAD:${GITHUB_REF#refs/heads/}
+            # Push with lease to prevent accidental force-push
+            git push origin HEAD:${GITHUB_REF#refs/heads/} --force-with-lease
           fi
