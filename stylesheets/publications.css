@@ -155,6 +155,27 @@
     font-size: 0.75rem;
 }
 
+.publications-scrollable {
+    max-height: 24rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.publications-scrollable::-webkit-scrollbar {
+    width: 8px;
+}
+
+.publications-scrollable::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.publications-scrollable::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 999px;
+}
+
 @media (max-width: 640px) {
     body {
     padding: 24px 12px;
