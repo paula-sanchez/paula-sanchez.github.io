@@ -6,7 +6,9 @@
 
   function buildProfilePublicationHtml(pub) {
     const borderAndBadgeClasses = window.PublicationsLoader.getTypeClasses(pub.type);
-    const titleLink = pub.url || (pub.doi ? (pub.doi.startsWith('http') ? pub.doi : 'https://doi.org/' + pub.doi) : null);
+    const doiLink = pub.doi ? (pub.doi.startsWith('http') ? pub.doi : 'https://doi.org/' + pub.doi) : null;
+    const urlLink = doiLink || (pub.url ? pub.url : null);
+    const titleLink = urlLink;
 
     return `
       <div class="p-5 rounded-lg border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-md hover:border-brand-200 transition-all">
@@ -27,10 +29,10 @@
             <p class="text-sm text-gray-600 mt-2">${pub.authorsDisplay}</p>
             <p class="text-sm text-gray-500 italic mt-1 font-serif">${pub.venue}</p>
 
-            ${pub.doi || pub.url ? `
+            ${urlLink ? `
             <div class="mt-3 flex gap-3">
-              ${pub.doi ? `<a href="${pub.doi.startsWith('http') ? pub.doi : 'https://doi.org/' + pub.doi}" target="_blank" class="text-xs font-medium text-brand-600 hover:text-brand-800 hover:underline"><i class="fa-solid fa-link mr-1"></i>DOI</a>` : ''}
-              ${pub.url ? `<a href="${pub.url}" target="_blank" class="text-xs font-medium text-brand-600 hover:text-brand-800 hover:underline"><i class="fa-solid fa-file-pdf mr-1"></i>URL / PDF</a>` : ''}
+              ${pub.doi ? `<a href="${doiLink}" target="_blank" class="text-xs font-medium text-brand-600 hover:text-brand-800 hover:underline"><i class="fa-solid fa-link mr-1"></i>DOI</a>` : ''}
+              <a href="${urlLink}" target="_blank" class="text-xs font-medium text-brand-600 hover:text-brand-800 hover:underline"><i class="fa-solid fa-file-pdf mr-1"></i>URL / PDF</a>
             </div>
             ` : ''}
           </div>
