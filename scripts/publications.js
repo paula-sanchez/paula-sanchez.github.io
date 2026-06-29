@@ -54,10 +54,33 @@
       : containerOrId;
   }
 
+  function openBibtexViewer(bibtex) {
+    if (!bibtex) {
+      return;
+    }
+
+    const blob = new Blob([bibtex], { type: 'text/plain;charset=utf-8' });
+    const blobUrl = URL.createObjectURL(blob);
+    window.open(blobUrl, '_blank', 'noopener,noreferrer');
+  }
+
+  function bindBibtexLinks(containerElement) {
+    if (!containerElement) {
+      return;
+    }
+
+    containerElement.querySelectorAll('a[data-bibtex-link]').forEach(link => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        const bibtex = decodeURIComponent(this.getAttribute('data-bibtex-link') || '');
+        openBibtexViewer(bibtex);
+      });
+    });
+  }
+
   function renderPublication(pub) {
     const borderAndBadgeClasses = getTypeClasses(pub.type);
     const hasBibtex = !!pub.bibtex;
-    const bibtexViewUrl = hasBibtex ? `data:text/plain;charset=utf-8,${encodeURIComponent(pub.bibtex)}` : null;
 
     return `
       <div class="pub-item flex flex-col sm:flex-row gap-4 p-6 rounded-lg border-l-4 ${borderAndBadgeClasses.border} bg-white shadow-sm hover:shadow-md transition"
@@ -83,10 +106,9 @@
           ${hasBibtex ? `
             <div class="mt-4 flex gap-2 flex-wrap">
               <a
-                href="${bibtexViewUrl}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-xs flex items-center px-3 py-1 border border-gray-200 rounded text-gray-500 hover:text-brand-600 hover:border-brand-600 transition"
+                href="#"
+                data-bibtex-link="${encodeURIComponent(pub.bibtex)}"
+                class="text-sm font-medium text-brand-600 hover:text-brand-800 hover:underline"
               >
                 <i class="fa-solid fa-quote-right mr-2"></i>BibTeX
               </a>
@@ -145,6 +167,8 @@
         containerElement.insertAdjacentHTML('beforeend', html);
       });
 
+      bindBibtexLinks(containerElement);
+
       if (onComplete) {
         onComplete(itemsToRender);
       }
@@ -170,6 +194,7 @@
 
   window.PublicationsLoader = PublicationsLoader;
   window.loadPublications = loadPublications;
+  window.openBibtexViewer = openBibtexViewer;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {

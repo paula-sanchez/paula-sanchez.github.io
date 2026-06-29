@@ -10,7 +10,6 @@
     const urlLink = doiLink || (pub.url ? pub.url : null);
     const titleLink = urlLink;
     const hasBibtex = !!pub.bibtex;
-    const bibtexViewUrl = hasBibtex ? `data:text/plain;charset=utf-8,${encodeURIComponent(pub.bibtex)}` : null;
 
     return `
       <div class="p-5 rounded-lg border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-md hover:border-brand-200 transition-all">
@@ -34,7 +33,7 @@
             ${urlLink || hasBibtex ? `
             <div class="mt-3 flex gap-3">
               ${urlLink ? `<a href="${urlLink}" target="_blank" class="text-xs font-medium text-brand-600 hover:text-brand-800 hover:underline"><i class="fa-solid fa-file-pdf mr-1"></i>URL / PDF</a>` : ''}
-              ${hasBibtex ? `<a href="${bibtexViewUrl}" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-brand-600 hover:text-brand-800 hover:underline"><i class="fa-solid fa-quote-right mr-1"></i>BibTeX</a>` : ''}
+              ${hasBibtex ? `<a href="#" data-bibtex-link="${encodeURIComponent(pub.bibtex)}" class="text-xs font-medium text-brand-600 hover:text-brand-800 hover:underline"><i class="fa-solid fa-quote-right mr-1"></i>BibTeX</a>` : ''}
             </div>
             ` : ''}
           </div>
