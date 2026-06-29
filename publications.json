@@ -2,37 +2,45 @@
   {
     "year": 2024,
     "type": "conference",
-    "badge": "Conf",
+    "badge": "Conference",
     "title": "A novel prediction model for combined computational and storage malleability",
     "authorsDisplay": "Sanchez-Checa, P., Singh, D. E., Garcia-Blas, J., & Carretero, J.",
     "authorsData": "Sanchez-Checa, Singh, Garcia-Blas, Carretero",
-    "venue": "11th ACM Celebration of Women in Computing: womENcourage 2024."
+    "venue": "11th ACM Celebration of Women in Computing: womENcourage 2024.",
+    "doi": "",
+    "url": "https://womencourage.acm.org/2024/wp-content/uploads/2024/06/womencourage2024-earlyworks-paper7.pdf"
   },
   {
     "year": 2024,
     "type": "conference",
-    "badge": "Conf",
+    "badge": "Conference",
     "title": "A transformer and data augmentation-based approach for propaganda identification and classification",
     "authorsDisplay": "Sanchez-Checa, P., Gallego-Torres, L., Sanchez-Escudero, M. A., Petre, C., & Segura-Bedmar, I.",
     "authorsData": "Sanchez-Checa, Gallego-Torres, Sanchez-Escudero, Petre, Segura-Bedmar",
-    "venue": "Proceedings of the Iberian languages evaluation forum (IberLEF 2024) co-located with the conference of the Spanish society for natural language processing (SEPLN 2024), Valladolid, Spain, vol. 3756, pp. 1-16, CEUR-WS.org."
+    "venue": "Proceedings of the Iberian languages evaluation forum (IberLEF 2024) co-located with the conference of the Spanish society for natural language processing (SEPLN 2024), Valladolid, Spain, vol. 3756, pp. 1-16, CEUR-WS.org.",
+    "doi": "",
+    "url": "https://ceur-ws.org/Vol-3756/DIPROMATS2024_paper3.pdf"
   },
   {
     "year": 2025,
     "type": "conference",
-    "badge": "Conf",
+    "badge": "Conference",
     "title": "Combining Malleability and Distributed Control Mechanisms to Reduce I/O Contention",
     "authorsDisplay": "Sanchez-Checa, P., Garcia-Blas, J., Carretero, J., & Singh, D. E.",
     "authorsData": "Sanchez-Checa, Garcia-Blas, Carretero, Singh",
-    "venue": "High Performance Computing, pp. 387-400, Springer Nature Switzerland."
+    "venue": "High Performance Computing, pp. 387-400, Springer Nature Switzerland.",
+    "doi": "10.1007/978-3-032-07612-0_30",
+    "url": "http://dx.doi.org/10.1007/978-3-032-07612-0_30"
   },
   {
     "year": 2025,
     "type": "journal",
-    "badge": "Jour",
+    "badge": "Journal",
     "title": "920-LEGIONELOSIS Y FENÓMENOS METEOROLÓGICOS EXTREMOS",
     "authorsDisplay": "Chaves-Cordero, J., Gómez-Barroso, D., Expósito-Singh, D., & Sánchez-Checa, P.",
     "authorsData": "Chaves-Cordero, Gómez-Barroso, Expósito-Singh, Sánchez-Checa",
-    "venue": "Gaceta Sanitaria, vol. 39(S2), pp. 106738, Elsevier BV."
+    "venue": "Gaceta Sanitaria, vol. 39(S2), pp. 106738, Elsevier BV.",
+    "doi": "10.1016/s0213-9111(25)00476-5",
+    "url": "http://dx.doi.org/10.1016/s0213-9111(25)00476-5"
   }
 ]
