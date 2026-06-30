@@ -375,13 +375,13 @@ def main():
     parser.add_argument(
         "-o",
         "--output",
-        default="publications.json",
+        default="generate_publications/publications.json",
         help="Output JSON file for unique entries (default: publications.json)",
     )
     parser.add_argument(
         "-d",
         "--duplicates",
-        default="duplicates.json",
+        default="generate_publications/testduplicates.json",
         help="Output JSON file listing duplicate groups (default: duplicates.json)",
     )
 
