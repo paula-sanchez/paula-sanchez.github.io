@@ -1,0 +1,18 @@
+name: Update ARCOS Group Profile (Submodule)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger Group Repo Update
+      run: |
+        curl -X POST \
+        -H "Authorization: token ${{ secrets.REPO_PAT }}" \
+        -H "Accept: application/vnd.github.v3+json" \
+        https://api.github.com/repos/ARCOS-UC3M/arcos-uc3m.github.io/dispatches \
+        -d '{"event_type": "update_submodule"}'
