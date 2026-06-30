@@ -57,7 +57,7 @@
 
     await window.PublicationsLoader.loadPublications({
       container,
-      publicationsPath: '/publications.json',
+      publicationsPath: 'generate_publications/publications.json',
       filter: (pub) => {
         const isJournalOrConference = pub.type === 'journal' || pub.type === 'conference' || pub.type === 'workshop';
         const isAuthor = String(pub.authorsDisplay || '').includes(authorToSearch) || String(pub.authorsData || '').includes(authorToSearch);

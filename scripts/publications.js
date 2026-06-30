@@ -1,7 +1,7 @@
 // publications.js
 
 (function () {
-  const DEFAULT_PUBLICATIONS_PATH = '/publications.json';
+  const DEFAULT_PUBLICATIONS_PATH = 'generate_publications/publications.json';
 
   function getTypeClasses(type) {
     if (type === 'journal') {
