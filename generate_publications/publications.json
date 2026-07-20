@@ -69,12 +69,12 @@
     "type": "conference",
     "badge": "Conference",
     "title": "Aprovechamiento de la gestión dinámica de recursos para la eficiencia energética: un caso de estudio",
-    "authorsDisplay": "Sánchez Checa, P., Sánchez-Gallegos, G., García-Blas, J., Carretero, J., & E. Singh, D.",
-    "authorsData": "Sánchez Checa, Sánchez-Gallegos, García-Blas, Carretero, E. Singh",
+    "authorsDisplay": "Sánchez Checa, P., Carretero, J., & E. Singh, D.",
+    "authorsData": "Sánchez Checa, Carretero, E. Singh",
     "venue": "XXXVI Jornadas de Paralelismo (JP26).",
     "doi": "",
     "url": "",
     "key": "sanchez2026aprovechamiento",
-    "bibtex": "@inproceedings{sanchez2026aprovechamiento,\n  author = {Sánchez Checa, Paula and Sánchez-Gallegos, Genaro and García-Blas, Javier and Carretero, Jesús and E. Singh, David},\n  title = {Aprovechamiento de la gestión dinámica de recursos para la eficiencia energética: un caso de estudio},\n  year = {2026},\n  booktitle = {XXXVI Jornadas de Paralelismo (JP26)},\n  language = {es},\n  month = {Jun}\n}"
+    "bibtex": "@inproceedings{sanchez2026aprovechamiento,\n  author = {Sánchez Checa, Paula and Carretero, Jesús and E. Singh, David},\n  title = {Aprovechamiento de la gestión dinámica de recursos para la eficiencia energética: un caso de estudio},\n  year = {2026},\n  booktitle = {XXXVI Jornadas de Paralelismo (JP26)},\n  language = {es},\n  month = {Jun}\n}"
   }
 ]
