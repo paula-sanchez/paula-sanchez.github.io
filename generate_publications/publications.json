@@ -40,8 +40,8 @@
   },
   {
     "year": 2025,
-    "type": "journal",
-    "badge": "Journal",
+    "type": "conference",
+    "badge": "Conference",
     "title": "920-LEGIONELOSIS Y FENÓMENOS METEOROLÓGICOS EXTREMOS",
     "authorsDisplay": "Chaves-Cordero, J., Gómez-Barroso, D., Expósito-Singh, D., & Sánchez-Checa, P.",
     "authorsData": "Chaves-Cordero, Gómez-Barroso, Expósito-Singh, Sánchez-Checa",
@@ -50,5 +50,31 @@
     "url": "http://dx.doi.org/10.1016/s0213-9111(25)00476-5",
     "key": "chaves2025920",
     "bibtex": "@article{chaves2025920,\n  author = {Chaves-Cordero, J and G{\\'o}mez-Barroso, D and Exp{\\'o}sito-Singh, D and S{\\'a}nchez-Checa, P},\n  title = {920-LEGIONELOSIS Y FEN{\\'O}MENOS METEOROL{\\'O}GICOS EXTREMOS},\n  year = {2025},\n  journal = {Gaceta Sanitaria},\n  volume = {39},\n  number = {S2},\n  pages = {106738},\n  doi = {10.1016/s0213-9111(25)00476-5},\n  url = {http://dx.doi.org/10.1016/s0213-9111(25)00476-5},\n  publisher = {Elsevier BV},\n  issn = {0213-9111},\n  month = {Sept}\n}"
+  },
+  {
+    "year": 2025,
+    "type": "conference",
+    "badge": "Conference",
+    "title": "Explorando la maleabilidad combinada de aplicaciones y sistemas de ficheros",
+    "authorsDisplay": "Sánchez Checa, P., Sánchez-Gallegos, G., García-Blas, J., Carretero, J., & E. Singh, D.",
+    "authorsData": "Sánchez Checa, Sánchez-Gallegos, García-Blas, Carretero, E. Singh",
+    "venue": "XXXV Jornadas de Paralelismo (JP25).",
+    "doi": "",
+    "url": "",
+    "key": "sanchez2025explorando",
+    "bibtex": "@inproceedings{sanchez2025explorando,\n  author = {Sánchez Checa, Paula and Sánchez-Gallegos, Genaro and García-Blas, Javier and Carretero, Jesús and E. Singh, David},\n  title = {Explorando la maleabilidad combinada de aplicaciones y sistemas de ficheros},\n  year = {2025},\n  booktitle = {XXXV Jornadas de Paralelismo (JP25)},\n  language = {es},\n  month = {Jun}\n}"
+  },
+  {
+    "year": 2026,
+    "type": "conference",
+    "badge": "Conference",
+    "title": "Aprovechamiento de la gestión dinámica de recursos para la eficiencia energética: un caso de estudio",
+    "authorsDisplay": "Sánchez Checa, P., Sánchez-Gallegos, G., García-Blas, J., Carretero, J., & E. Singh, D.",
+    "authorsData": "Sánchez Checa, Sánchez-Gallegos, García-Blas, Carretero, E. Singh",
+    "venue": "XXXVI Jornadas de Paralelismo (JP26).",
+    "doi": "",
+    "url": "",
+    "key": "sanchez2026aprovechamiento",
+    "bibtex": "@inproceedings{sanchez2026aprovechamiento,\n  author = {Sánchez Checa, Paula and Sánchez-Gallegos, Genaro and García-Blas, Javier and Carretero, Jesús and E. Singh, David},\n  title = {Aprovechamiento de la gestión dinámica de recursos para la eficiencia energética: un caso de estudio},\n  year = {2026},\n  booktitle = {XXXVI Jornadas de Paralelismo (JP26)},\n  language = {es},\n  month = {Jun}\n}"
   }
 ]
