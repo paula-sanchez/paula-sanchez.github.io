@@ -55,20 +55,48 @@ LATEX_ACCENTS = {
     r"\c c": "ç", r"\c C": "Ç",
 }
 
-def find_workshop_papers(entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+NEW_KEYS = {
+    "workshop": ["sanchez2024transformer", "sanchez2025combining"],
+    "conference": ["sanchez2024novel", "chaves2025920"],
+}
+
+NEW_BADGES = {
+    "workshop": "Workshop",
+    "conference": "Conference",
+}
+
+
+def find_entries_by_keys(entries: List[Dict[str, Any]], keys: List[str]) -> List[Dict[str, Any]]:
     """
-    Identify workshop publications based on keywords.
-    Returns a list of entries that are workshop papers.
+    Return entries whose BibTeX citation key contains any of the provided keywords.
     """
-    workshop_keys = ["sanchez2024transformer", "sanchez2025combining"]
-    workshop_entries = []
+    if not keys:
+        return []
+
+    matches = []
+    normalized_keys = [key.lower() for key in keys if key]
 
     for entry in entries:
         entry_id = (entry.get("key") or "").lower()
-        if any(keyword in entry_id for keyword in workshop_keys):
-            workshop_entries.append(entry)
+        if any(keyword in entry_id for keyword in normalized_keys):
+            matches.append(entry)
 
-    return workshop_entries
+    return matches
+
+
+def apply_type_overrides(entries: List[Dict[str, Any]]) -> None:
+    """
+    Change the publication type for entries whose key is listed.
+    """
+    for entry_type, keys in NEW_KEYS.items():
+        matches = find_entries_by_keys(entries, keys)
+        if not matches:
+            continue
+
+        badge = NEW_BADGES.get(entry_type, entry_type.capitalize())
+        for entry in matches:
+            entry["type"] = entry_type
+            entry["badge"] = badge
 
 def latex_to_unicode(text: str) -> str:
     if not text:
@@ -411,12 +439,8 @@ def main():
             seen[key] = j
             norm_entries.append(j)
 
-    # Detect workshop publications
-    workshop_matches = find_workshop_papers(norm_entries)
-    if workshop_matches:
-        for we in workshop_matches:
-            we["type"] = "workshop"
-            we["badge"] = "Workshop"
+    # Apply any manual publication-type overrides (e.g. workshop/conference entries)
+    apply_type_overrides(norm_entries)
 
     # Save unique entries
     with open(args.output, "w", encoding="utf-8") as f:
