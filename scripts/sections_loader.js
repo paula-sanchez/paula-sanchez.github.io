@@ -64,7 +64,7 @@
         return isJournalOrConference && isAuthor;
       },
       sort: (a, b) => b.year - a.year,
-      limit: 5,
+      limit: null,
       renderer: buildProfilePublicationHtml,
       emptyMessage: '<p class="text-gray-500 italic">No recent journal publications found.</p>'
     });
