@@ -34,6 +34,7 @@ TYPE_MAP = {
     "incollection": ("bookchapter", "Chapter"),
     "book": ("book", "Book"),
     "misc": ("other", "Other"),
+    "poster": ("poster", "Poster"),
 }
 
 
@@ -127,7 +128,30 @@ def map_entry_type(entry_type: str) -> Tuple[str, str]:
     return fallback_type, badge
 
 
-# ---------- String cleaning ----------
+# ---------- Entry collection ----------
+
+def collect_entries_from_dir(directory: str) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    entries: List[Dict[str, Any]] = []
+    poster_entries: List[Dict[str, Any]] = []
+    for fname in os.listdir(directory):
+        if not fname.lower().endswith(".bib"):
+            continue
+        full_path = os.path.join(directory, fname)
+        if not os.path.isfile(full_path):
+            continue
+        print(f"Reading {full_path}")
+        try:
+            file_entries = read_bib_file(full_path)
+            if fname.lower() == "posters.bib":
+                poster_entries.extend(file_entries)
+            else:
+                entries.extend(file_entries)
+        except Exception as e:
+            print(f"  ! Error reading {full_path}: {e}")
+    return entries, poster_entries
+
+
+# ---------- Normalization to target JSON schema ----------
 
 def clean_braces(text: str) -> str:
     if not text:
@@ -302,7 +326,10 @@ def entry_to_bibtex(entry: Dict[str, Any]) -> str:
 
 # ---------- Normalization to target JSON schema ----------
 
-def normalize_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
+from typing import List, Dict, Any, Tuple, Optional
+
+
+def normalize_entry(entry: Dict[str, Any], override_type: Optional[str] = None) -> Dict[str, Any]:
     """
     Convert a BibTeX entry to the target JSON format:
 
@@ -318,7 +345,7 @@ def normalize_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
         "bibtex": "@inproceedings{Sanchez2025, ...}"
     }
     """
-    entry_type = entry.get("ENTRYTYPE", "")
+    entry_type = override_type or entry.get("ENTRYTYPE", "")
     mapped_type, badge = map_entry_type(entry_type)
 
     # Year
@@ -375,23 +402,6 @@ def read_bib_file(path: str) -> List[Dict[str, Any]]:
     return bib_database.entries
 
 
-def collect_entries_from_dir(directory: str) -> List[Dict[str, Any]]:
-    entries: List[Dict[str, Any]] = []
-    for fname in os.listdir(directory):
-        if not fname.lower().endswith(".bib"):
-            continue
-        full_path = os.path.join(directory, fname)
-        if not os.path.isfile(full_path):
-            continue
-        print(f"Reading {full_path}")
-        try:
-            file_entries = read_bib_file(full_path)
-            entries.extend(file_entries)
-        except Exception as e:
-            print(f"  ! Error reading {full_path}: {e}")
-    return entries
-
-
 def main():
     parser = argparse.ArgumentParser(
         description="Merge .bib files in a directory into a single JSON list with duplicate detection."
@@ -413,31 +423,44 @@ def main():
         help="Output JSON file listing duplicate groups (default: duplicates.json)",
     )
 
+    parser.add_argument(
+        "-p",
+        "--posters-output",
+        default="generate_publications/posters.json",
+        help="Output JSON file for poster entries (default: posters.json)",
+    )
+
     args = parser.parse_args()
     directory = args.directory
 
     if not os.path.isdir(directory):
         raise SystemExit(f"Error: '{directory}' is not a directory")
 
-    raw_entries = collect_entries_from_dir(directory)
+    raw_entries, raw_poster_entries = collect_entries_from_dir(directory)
     print(f"Total raw BibTeX entries: {len(raw_entries)}")
+    print(f"Total raw poster BibTeX entries: {len(raw_poster_entries)}")
 
-    norm_entries: List[Dict[str, Any]] = []
-    dup_groups: Dict[str, List[Dict[str, Any]]] = {}
-    seen: Dict[str, Dict[str, Any]] = {}
+    def build_unique_entries(entries_list: List[Dict[str, Any]], override_type: str | None = None):
+        norm_list: List[Dict[str, Any]] = []
+        dup_groups_local: Dict[str, List[Dict[str, Any]]] = {}
+        seen_local: Dict[str, Dict[str, Any]] = {}
 
-    for e in raw_entries:
-        j = normalize_entry(e)
-        key = make_duplicate_key(j)
+        for e in entries_list:
+            j = normalize_entry(e, override_type=override_type)
+            key = make_duplicate_key(j)
 
-        if key in seen:
-            # First time we see a duplicate for this key: add both original and new
-            if key not in dup_groups:
-                dup_groups[key] = [seen[key]]
-            dup_groups[key].append(j)
-        else:
-            seen[key] = j
-            norm_entries.append(j)
+            if key in seen_local:
+                if key not in dup_groups_local:
+                    dup_groups_local[key] = [seen_local[key]]
+                dup_groups_local[key].append(j)
+            else:
+                seen_local[key] = j
+                norm_list.append(j)
+
+        return norm_list, dup_groups_local
+
+    norm_entries, dup_groups = build_unique_entries(raw_entries)
+    norm_poster_entries, _ = build_unique_entries(raw_poster_entries, override_type="poster")
 
     # Apply any manual publication-type overrides (e.g. workshop/conference entries)
     apply_type_overrides(norm_entries)
@@ -446,14 +469,19 @@ def main():
     with open(args.output, "w", encoding="utf-8") as f:
         json.dump(norm_entries, f, indent=2, ensure_ascii=False)
 
+    with open(args.posters_output, "w", encoding="utf-8") as f:
+        json.dump(norm_poster_entries, f, indent=2, ensure_ascii=False)
+
     # Save duplicates as a list of groups
     duplicate_groups_list = list(dup_groups.values())
     with open(args.duplicates, "w", encoding="utf-8") as f:
         json.dump(duplicate_groups_list, f, indent=2, ensure_ascii=False)
 
     print(f"Unique entries written to: {args.output}")
+    print(f"Unique posters written to: {args.posters_output}")
     print(f"Duplicate groups written to: {args.duplicates}")
     print(f"Unique entries: {len(norm_entries)}")
+    print(f"Unique posters: {len(norm_poster_entries)}")
     print(f"Number of duplicate groups: {len(duplicate_groups_list)}")
 
 
