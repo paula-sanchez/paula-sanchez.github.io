@@ -68,7 +68,7 @@
       sort: (a, b) => b.year - a.year,
       limit: null,
       renderer: buildProfilePublicationHtml,
-      emptyMessage: '<p class="text-gray-500 italic">No recent journal publications found.</p>'
+      emptyMessage: '<p class="text-gray-500 italic">No publications found.</p>'
     });
     } catch (error) {
       console.error('Error loading publications:', error);
