@@ -140,7 +140,7 @@
     try {
       const response = await fetch(publicationsPath);
       if (!response.ok) {
-        throw new Error(`Error loading ${publicationsPath}`);
+        throw new Error(`Error loading ${publicationsPath}:` + `${response.status} ${response.statusText}`);
       }
 
       const publications = await response.json();
