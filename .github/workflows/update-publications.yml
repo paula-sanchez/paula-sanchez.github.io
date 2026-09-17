@@ -28,13 +28,17 @@ jobs:
         run: |
           python generate_publications/generate.py generate_publications/bibs \
             -o generate_publications/publications.json \
-            -d generate_publications/testduplicates.json
+            -d generate_publications/testduplicates.json \
+            -p generate_publications/posters.json
+            
       - name: Commit and push updated JSON to same branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add generate_publications/publications.json generate_publications/testduplicates.json
+          git generate_publications/publications.json \
+              generate_publications/posters.json \
+              generate_publications/testduplicates.json
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
