@@ -49,12 +49,14 @@
     }
 
     const authorToSearch = getProfileAuthor();
+
     if (!window.PublicationsLoader || typeof window.PublicationsLoader.loadPublications !== 'function') {
       console.error('PublicationsLoader is not available.');
       container.innerHTML = '<p class="text-red-500 italic text-sm">Error loading publications. Please try again later.</p>';
       return;
     }
 
+    try{
     await window.PublicationsLoader.loadPublications({
       container,
       publicationsPath: 'generate_publications/publications.json',
@@ -68,6 +70,43 @@
       renderer: buildProfilePublicationHtml,
       emptyMessage: '<p class="text-gray-500 italic">No recent journal publications found.</p>'
     });
+    } catch (error) {
+      console.error('Error loading publications:', error);
+      container.innerHTML = '<p class="text-red-500 italic text-sm">Error loading publications. Please try again later.</p>';
+    }
+  }
+
+  async function loadPosterPublications() {
+    const container = document.getElementById('posters-list');
+    if (!container) {
+      return;
+    }
+
+    const authorToSearch = getProfileAuthor();
+
+    if (!window.PublicationsLoader || typeof window.PublicationsLoader.loadPublications !== 'function') {
+      console.error('PublicationsLoader is not available.');
+      container.innerHTML = '<p class="text-red-500 italic text-sm">Error loading posters. Please try again later.</p>';
+      return;
+    }
+
+    try{
+      await window.PublicationsLoader.loadPublications({
+        container,
+        publicationsPath: 'generate_publications/posters.json',
+        filter: (pub) => {
+          const isAuthor = String(pub.authorsDisplay || '').includes(authorToSearch) || String(pub.authorsData || '').includes(authorToSearch);
+          return isAuthor;
+        },
+        sort: (a, b) => b.year - a.year,
+        limit: null,
+        renderer: buildProfilePublicationHtml,
+        emptyMessage: '<p class="text-gray-500 italic">No posters found.</p>'
+      });
+    } catch (error) {
+      console.error('Error loading posters:', error);
+      container.innerHTML = '<p class="text-red-500 italic text-sm">Error loading posters. Please try again later.</p>';
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -96,5 +135,6 @@
     }
 
     loadProfilePublications();
+    loadPosterPublications();
   });
 })();
