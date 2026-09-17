@@ -147,7 +147,9 @@ def collect_entries_from_dir(directory: str) -> Tuple[List[Dict[str, Any]], List
             else:
                 entries.extend(file_entries)
         except Exception as e:
-            print(f"  ! Error reading {full_path}: {e}")
+            raise RuntimeError(
+                f"Error reading {full_path}: {e}"
+            ) from e
     return entries, poster_entries
 
 
@@ -465,12 +467,31 @@ def main():
     # Apply any manual publication-type overrides (e.g. workshop/conference entries)
     apply_type_overrides(norm_entries)
 
-    # Save unique entries
-    with open(args.output, "w", encoding="utf-8") as f:
-        json.dump(norm_entries, f, indent=2, ensure_ascii=False)
+    # Ensure output directories exist
+    for output_path in (args.output, args.posters_output, args.duplicates):
+        output_dir = os.path.dirname(output_path)
+    
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
 
-    with open(args.posters_output, "w", encoding="utf-8") as f:
-        json.dump(norm_poster_entries, f, indent=2, ensure_ascii=False)
+    # Save unique entries
+    if not raw_entries:
+        raise SystemExit(
+            f"Error: no publication entries found in {directory}."
+            "Not overwriting publications.json."
+        )
+    else:
+        with open(args.output, "w", encoding="utf-8") as f:
+            json.dump(norm_entries, f, indent=2, ensure_ascii=False)
+
+    if not raw_entries:
+        raise SystemExit(
+            f"Error: no publication entries found in {directory}."
+            "Not overwriting posters.json."
+        )   
+    else:
+        with open(args.posters_output, "w", encoding="utf-8") as f:
+            json.dump(norm_poster_entries, f, indent=2, ensure_ascii=False)
 
     # Save duplicates as a list of groups
     duplicate_groups_list = list(dup_groups.values())
