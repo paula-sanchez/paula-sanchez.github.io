@@ -109,6 +109,18 @@
     }
   }
 
+  let reports = [];
+
+  const reportsPromise =fetch('generate_publications/reports.json')
+    .then(response => response.json())
+    .then(data => {
+      reports = data;
+      return reports;
+    })
+    .catch(error => {
+      console.error('Error loading reports:', error);
+    });
+
   document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('toggle-all-btn');
     const detailsElements = document.querySelectorAll('main details');
@@ -136,5 +148,21 @@
 
     loadProfilePublications();
     loadPosterPublications();
+
+    // load report BibTeX links
+    document.querySelectorAll('[data-bibtex-key]').forEach(link => {
+      link.addEventListener('click', async function (e) {
+        e.preventDefault();
+
+        const reports = await reportsPromise; // wait for the reports to be loaded
+        const report = reports.find(
+          r => r.key === this.dataset.bibtexKey
+        );
+
+        if (report) {
+          window.openBibtexViewer(report.bibtex);
+        }
+      });
+    });
   });
 })();
