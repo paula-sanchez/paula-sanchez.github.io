@@ -35,6 +35,7 @@ TYPE_MAP = {
     "book": ("book", "Book"),
     "misc": ("other", "Other"),
     "poster": ("poster", "Poster"),
+    "report": ("report", "Report"),
 }
 
 
