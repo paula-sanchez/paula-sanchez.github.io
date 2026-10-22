@@ -473,7 +473,7 @@ def main():
     apply_type_overrides(norm_entries)
 
     # Ensure output directories exist
-    for output_path in (args.output, args.posters_output, args.duplicates):
+    for output_path in (args.output, args.posters_output, args.reports_output, args.duplicates):
         output_dir = os.path.dirname(output_path)
     
     if output_dir:
