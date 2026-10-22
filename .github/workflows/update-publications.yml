@@ -29,7 +29,8 @@ jobs:
           python generate_publications/generate.py generate_publications/bibs \
             -o generate_publications/publications.json \
             -d generate_publications/testduplicates.json \
-            -p generate_publications/posters.json
+            -p generate_publications/posters.json \
+            -r generate_publications/reports.json
             
       - name: Commit and push updated JSON to same branch
         run: |
@@ -38,6 +39,7 @@ jobs:
 
           git add generate_publications/publications.json \
               generate_publications/posters.json \
+              generate_publications/reports.json \
               generate_publications/testduplicates.json
 
           if git diff --cached --quiet; then

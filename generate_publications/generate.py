@@ -435,6 +435,13 @@ def main():
         help="Output JSON file for poster entries (default: posters.json)",
     )
 
+    parser.add_argument(
+        "-r",
+        "--reports-output",
+        default="generate_publications/reports.json",
+        help="Output JSON file for report entries (default: reports.json)",
+    )
+
     args = parser.parse_args()
     directory = args.directory
 
