@@ -483,8 +483,8 @@ def main():
     for output_path in (args.output, args.posters_output, args.reports_output, args.duplicates):
         output_dir = os.path.dirname(output_path)
     
-    if output_dir:
-        os.makedirs(output_dir, exist_ok=True)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
 
     # Save unique entries
     if not raw_entries:
