@@ -1,5 +1,18 @@
 [
   {
+    "year": 2026,
+    "type": "book",
+    "badge": "Book",
+    "title": "Multi-model assessment of the impact of newborn RSV immunisation on hospitalisation burden in the EU/EEA – Scenario projections from the 2025/26 RespiCompass RSV round – Assessment",
+    "authorsDisplay": "Prevention, E. C. f. D. & Control",
+    "authorsData": "Prevention, Control",
+    "venue": "European Centre for Disease Prevention and Control.",
+    "doi": "doi/10.2900/9312789",
+    "url": "",
+    "key": "doi/10.2900/9312789",
+    "bibtex": "@book{doi/10.2900/9312789,\n  author = {{European Centre for Disease Prevention {and} Control}},\n  title = {Multi-model assessment of the impact of newborn RSV immunisation on hospitalisation burden in the EU/EEA – Scenario projections from the 2025/26 RespiCompass RSV round – Assessment},\n  year = {2026},\n  doi = {doi/10.2900/9312789},\n  publisher = {European Centre for Disease Prevention and Control}\n}"
+  },
+  {
     "year": 2024,
     "type": "conference",
     "badge": "Conference",
@@ -76,18 +89,5 @@
     "url": "",
     "key": "sanchez2026aprovechamiento",
     "bibtex": "@inproceedings{sanchez2026aprovechamiento,\n  author = {Sánchez Checa, Paula and Carretero, Jesús and E. Singh, David},\n  title = {Aprovechamiento de la gestión dinámica de recursos para la eficiencia energética: un caso de estudio},\n  year = {2026},\n  booktitle = {XXXVI Jornadas de Paralelismo (JP26)},\n  language = {es},\n  month = {Jun}\n}"
-  },
-  {
-    "year": 2026,
-    "type": "book",
-    "badge": "Book",
-    "title": "Multi-model assessment of the impact of newborn RSV immunisation on hospitalisation burden in the EU/EEA – Scenario projections from the 2025/26 RespiCompass RSV round – Assessment",
-    "authorsDisplay": "Prevention, E. C. f. D. & Control",
-    "authorsData": "Prevention, Control",
-    "venue": "European Centre for Disease Prevention and Control.",
-    "doi": "doi/10.2900/9312789",
-    "url": "",
-    "key": "doi/10.2900/9312789",
-    "bibtex": "@book{doi/10.2900/9312789,\n  author = {{European Centre for Disease Prevention {and} Control}},\n  title = {Multi-model assessment of the impact of newborn RSV immunisation on hospitalisation burden in the EU/EEA – Scenario projections from the 2025/26 RespiCompass RSV round – Assessment},\n  year = {2026},\n  doi = {doi/10.2900/9312789},\n  publisher = {European Centre for Disease Prevention and Control}\n}"
   }
 ]
