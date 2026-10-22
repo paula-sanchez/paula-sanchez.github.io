@@ -133,6 +133,7 @@ def map_entry_type(entry_type: str) -> Tuple[str, str]:
 def collect_entries_from_dir(directory: str) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     entries: List[Dict[str, Any]] = []
     poster_entries: List[Dict[str, Any]] = []
+    report_entries: List[Dict[str, Any]] = []
     for fname in os.listdir(directory):
         if not fname.lower().endswith(".bib"):
             continue
@@ -144,13 +145,15 @@ def collect_entries_from_dir(directory: str) -> Tuple[List[Dict[str, Any]], List
             file_entries = read_bib_file(full_path)
             if fname.lower() == "posters.bib":
                 poster_entries.extend(file_entries)
+            elif fname.lower() == "reports.bib":
+                report_entries.extend(file_entries)
             else:
                 entries.extend(file_entries)
         except Exception as e:
             raise RuntimeError(
                 f"Error reading {full_path}: {e}"
             ) from e
-    return entries, poster_entries
+    return entries, poster_entries, report_entries
 
 
 # ---------- Normalization to target JSON schema ----------
@@ -438,9 +441,10 @@ def main():
     if not os.path.isdir(directory):
         raise SystemExit(f"Error: '{directory}' is not a directory")
 
-    raw_entries, raw_poster_entries = collect_entries_from_dir(directory)
+    raw_entries, raw_poster_entries, raw_report_entries = collect_entries_from_dir(directory)
     print(f"Total raw BibTeX entries: {len(raw_entries)}")
     print(f"Total raw poster BibTeX entries: {len(raw_poster_entries)}")
+    print(f"Total raw report BibTeX entries: {len(raw_report_entries)}")
 
     def build_unique_entries(entries_list: List[Dict[str, Any]], override_type: str | None = None):
         norm_list: List[Dict[str, Any]] = []
@@ -463,6 +467,7 @@ def main():
 
     norm_entries, dup_groups = build_unique_entries(raw_entries)
     norm_poster_entries, _ = build_unique_entries(raw_poster_entries, override_type="poster")
+    norm_report_entries, _ = build_unique_entries(raw_report_entries, override_type="report")
 
     # Apply any manual publication-type overrides (e.g. workshop/conference entries)
     apply_type_overrides(norm_entries)
@@ -484,14 +489,23 @@ def main():
         with open(args.output, "w", encoding="utf-8") as f:
             json.dump(norm_entries, f, indent=2, ensure_ascii=False)
 
-    if not raw_entries:
+    if not raw_poster_entries:
         raise SystemExit(
-            f"Error: no publication entries found in {directory}."
+            f"Error: no poster entries found in {directory}."
             "Not overwriting posters.json."
         )   
     else:
         with open(args.posters_output, "w", encoding="utf-8") as f:
             json.dump(norm_poster_entries, f, indent=2, ensure_ascii=False)
+
+    if not raw_report_entries:
+        raise SystemExit(
+            f"Error: no report entries found in {directory}."
+            "Not overwriting reports.json."
+        )
+    else:
+        with open(args.reports_output, "w", encoding="utf-8") as f:
+            json.dump(norm_report_entries, f, indent=2, ensure_ascii=False)
 
     # Save duplicates as a list of groups
     duplicate_groups_list = list(dup_groups.values())
@@ -500,9 +514,11 @@ def main():
 
     print(f"Unique entries written to: {args.output}")
     print(f"Unique posters written to: {args.posters_output}")
+    print(f"Unique reports written to: {args.reports_output}")
     print(f"Duplicate groups written to: {args.duplicates}")
     print(f"Unique entries: {len(norm_entries)}")
     print(f"Unique posters: {len(norm_poster_entries)}")
+    print(f"Unique reports: {len(norm_report_entries)}")
     print(f"Number of duplicate groups: {len(duplicate_groups_list)}")
 
 
