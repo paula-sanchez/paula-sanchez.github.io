@@ -10,6 +10,6 @@
     "doi": "doi/10.2900/9312789",
     "url": "https://data.europa.eu/doi/10.2900/9312789",
     "key": "ecdcRSVreport2026",
-    "bibtex": "@book{ecdcRSVreport2026,\n  author = {{European Centre for Disease Prevention {and} Control}},\n  title = {Multi-model assessment of the impact of newborn RSV immunisation on hospitalisation burden in the EU/EEA – Scenario projections from the 2025/26 RespiCompass RSV round – Assessment},\n  year = {2026},\n  doi = {doi/10.2900/9312789},\n  url = {https://data.europa.eu/doi/10.2900/9312789},\n  publisher = {European Centre for Disease Prevention and Control}\n}"
+    "bibtex": "@book{ecdcRSVreport2026,\n  author = {{European Centre for Disease Prevention {and} Control}},\n  title = {Multi-model assessment of the impact of newborn RSV immunisation on hospitalisation burden in the EU/EEA – Scenario projections from the 2025/26 RespiCompass RSV round – Assessment},\n  year = {2026},\n  doi = {doi/10.2900/9312789},\n  url = {https://data.europa.eu/doi/10.2900/9312789},\n  publisher = {European Centre for Disease Prevention and Control},\n  address = {Stockholm, Sweeden},\n  isbn = {978-92-9498-933-8},\n  laneguage = {en},\n  month = {October}\n}"
   }
 ]
