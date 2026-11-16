@@ -58,7 +58,7 @@ LATEX_ACCENTS = {
 }
 
 NEW_KEYS = {
-    "workshop": ["sanchez2024transformer", "sanchez2025combining"],
+    "workshop": ["sanchez2024transformer", "sanchez2025combining", "sanchez2025comparative"],
     "conference": ["sanchez2024novel", "chaves2025920"],
 }
 
